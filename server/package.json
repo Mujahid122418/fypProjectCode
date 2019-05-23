@@ -1,0 +1,20 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "node.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mujahid",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.16.4",
+    "mongoose": "^5.5.7",
+    "mongoose-connect": "0.0.3",
+    "multer": "^1.4.1",
+    "react-redux": "^7.0.3",
+    "redux": "^4.0.1"
+  }
+}

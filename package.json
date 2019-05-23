@@ -1,0 +1,46 @@
+{
+  "name": "business_dial",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "devTools": "react-devtools"
+  },
+  "dependencies": {
+    "@react-native-community/async-storage": "^1.2.4",
+    "body-parser": "^1.19.0",
+    "express": "^4.16.4",
+    "link": "^0.1.5",
+    "mongoose": "^5.5.7",
+    "mongoose-connect": "0.0.3",
+    "multer": "^1.4.1",
+    "native-base": "^2.12.1",
+    "react": "16.8.3",
+    "react-native": "0.59.3",
+    "react-native-geolocation-service": "^2.0.1",
+    "react-native-gesture-handler": "^1.1.0",
+    "react-native-image-picker": "^0.28.1",
+    "react-native-maps": "^0.24.0",
+    "react-native-paper": "^2.15.2",
+    "react-native-phone-call": "^1.0.9",
+    "react-native-sms": "^1.9.0",
+    "react-native-vector-icons": "^6.4.2",
+    "react-navigation": "^3.6.1",
+    "react-navigation-material-bottom-tabs": "^1.0.0",
+    "react-redux": "^7.0.3",
+    "redux": "^4.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "7.4.0",
+    "@babel/runtime": "7.4.2",
+    "babel-jest": "24.6.0",
+    "jest": "24.6.0",
+    "metro-react-native-babel-preset": "0.53.1",
+    "react-test-renderer": "16.8.3",
+    "reactotron-react-native": "^3.2.1"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
