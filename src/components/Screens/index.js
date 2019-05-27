@@ -5,9 +5,9 @@ import MapScreen from './mapScreen'
 import NewsFeed from './newsFood'
 import Blogs from './blogs'
 import CarsList from './carsList';
-// import SplashScreen from './splashScreen';
-// import Jobs from './jobs';
-// import RentalOfficesDiscription from './rentalOfficesDiscription';
+import SplashScreen from './splashScreen';
+import Chat from './chatBox';
+
 import WelComeScreen from './welcomeScreen';
 import LogInScreen from './loginInScreen';
 import SignUpScreen from './signUpScreen';
@@ -23,20 +23,20 @@ const appTabNavigator = createMaterialBottomTabNavigator({
   },
   Cars: {
     screen: Blogs,
-    navigationOptions: { tabBarIcon: ({ tintColor }) => (<Icon name="car" size={24} style={{ color: '#ab47bc' }} />) }
+    navigationOptions: { tabBarIcon: ({ tintColor }) => (<Icon name="car" size={24} style={{ color: '#ff7043' }} />) }
   },
-  NewsFeed: {
-    screen: NewsFeed,
-    navigationOptions: { tabBarIcon: ({ tintColor }) => (<Icon name="newspaper" size={24} style={{ color: '#43a047' }} />) }
-
-  },
-
-  // ChatBox: {
-  //   screen: Jobs,
-  //   navigationOptions: { tabBarIcon: ({ tintColor }) => (<Icon name="new-message" size={24} style={{ color: '#ab47bc' }} />) }
-
+  // NewsFeed: {
+  //   screen: NewsFeed,
+  //   navigationOptions: { tabBarIcon: ({ tintColor }) => (<Icon name="newspaper" size={24} style={{ color: '#43a047' }} />) }
 
   // },
+
+  ChatBox: {
+    screen: Chat,
+    navigationOptions: { tabBarIcon: ({ tintColor }) => (<Icon name="comment-dots" size={24} style={{ color: '#ff7043' }} />) }
+
+
+  },
 }, {
     activeColor: '#f0edf6',
     inactiveColor: '#3e2465',
@@ -47,7 +47,12 @@ const appTabNavigator = createMaterialBottomTabNavigator({
 
 // main stack navigatior
 const authStackNavigation = createStackNavigator({
-  // SplashScreen:SplashScreen,
+  SplashScreen: {
+    screen: SplashScreen,
+    navigationOptions: {
+      header: null
+    }
+  },
   Welcome: WelComeScreen,
   CarsList: CarsList,
   CarRentalOffices: CarRentalOffices,
@@ -64,10 +69,10 @@ const authStackNavigation = createStackNavigator({
 })
 
 // main switch navigators
-const AppNavigator = createSwitchNavigator({
-  // Home: HeaderComponent,
-  SplashScreen: authStackNavigation
+// const AppNavigator = createSwitchNavigator({
+//   // Home: HeaderComponent,
+//   SplashScreen: authStackNavigation
 
-});
+// });
 
-export default createAppContainer(AppNavigator);
+export default createAppContainer(authStackNavigation);

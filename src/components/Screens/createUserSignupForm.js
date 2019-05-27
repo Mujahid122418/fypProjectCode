@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import ImagePicker from 'react-native-image-picker';
 // AppRegistry, StyleSheet, Text, View, PixelRatio, TouchableOpacity, Image,
 import { Alert, StyleSheet, PixelRatio, TouchableOpacity, Image } from 'react-native'
-import { Container, Content, Thumbnail, Form, Item, View, Label, Input, Icon, Picker, Button, Text, ListItem } from 'native-base';
+import { Container, Content, Thumbnail, Form, Item, View, Label, Input, Button, Text, ListItem } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+
 import { RadioButton } from 'react-native-paper';
+import logo from '../../images/logo.png'
 import MapScreen from './mapScreen';
 
 import store from '../../store/store';
@@ -51,7 +54,7 @@ export default class createUserSignupForm extends Component {
         // let source = { uri: 'data:image/jpeg;base64,' + response.data };
 
         this.setState({
-          base64Image:'data:image/jpeg;base64,' + response.data,
+          base64Image: 'data:image/jpeg;base64,' + response.data,
           ImageSource: source
 
         });
@@ -96,15 +99,17 @@ export default class createUserSignupForm extends Component {
   render() {
     const type = this.state.type;
     console.log(this.props)
-    const path = 'https://i.pinimg.com/originals/cd/ba/7a/cdba7ad02665c51892c4860f6fc201af.png'
+    // const path = 'https://i.pinimg.com/originals/cd/ba/7a/cdba7ad02665c51892c4860f6fc201af.png'
     return (
 
       <Container>
 
         <Content>
-          <Thumbnail style={{ position: 'absolute', marginTop: '8%', width: 150, height: 100, flex: 1, justifyContent: 'center', alignSelf: 'center' }} large square source={{ uri: path }} />
-          <Form style={{ marginTop: '45%' }}>
+          <Image style={{ width: 150, height: 150, marginLeft: 100, marginTop: 50 }} source={logo} />
+          {/* <Thumbnail style={{ position: 'absolute', marginTop: '8%', width: 150, height: 100, flex: 1, justifyContent: 'center', alignSelf: 'center' }} large square source={{ uri: path }} /> */}
+          <Form style={{ marginTop: '5%' }}>
             <View style={{ flex: 1, flexDirection: 'row', alignContent: 'center', justifyContent: 'center' }}>
+
               <Text>User</Text>
               <RadioButton
                 value="User"
@@ -122,29 +127,30 @@ export default class createUserSignupForm extends Component {
                 onPress={() => { this.setState({ type: 'Business', }); }}
               />
             </View>
-            {this.state.type == "Business" && <MapScreen onLocationHandled={this.onLocationMarked} />}
+            {this.state.type == "Business" && <MapScreen onLocationHandled={this.onLocationMarked}  />}
             <Item floatingLabel>
-              <Icon active name='person' />
+            <Icon name='user' size={25} color="black" />
+
               <Label>Username</Label>
               <Input name="username" value={this.state.username} onChangeText={(text) => { this.setState({ username: text }) }} />
             </Item>
             {this.state.type == "Business" && <Item floatingLabel>
-              <Icon active name='person' />
+              <Icon active name='business' />
               <Label>Business Name</Label>
               <Input name="business" value={this.state.business} onChangeText={(text) => { this.setState({ business: text }) }} />
             </Item>}
             <Item floatingLabel>
-              <Icon active name='person' />
+              <Icon active name='email' />
               <Label>Email</Label>
               <Input name="email" value={this.state.email} onChangeText={(text) => { this.setState({ email: text }) }} />
             </Item>
             <Item floatingLabel>
-              <Icon active name='person' />
+              <Icon active name='phone' />
               <Label> Contact Number</Label>
               <Input name="number" value={this.state.number} onChangeText={(text) => { this.setState({ number: text }) }} />
             </Item>
             <Item floatingLabel>
-              <Icon active name='person' />
+              <Icon active name='logo-apple' />
               <Label> Address</Label>
               <Input name="address" value={this.state.address} onChangeText={(text) => { this.setState({ address: text }) }} />
             </Item>
@@ -169,14 +175,16 @@ export default class createUserSignupForm extends Component {
 
               </View>
             }
-            <Button
+            <TouchableOpacity style={{
+              backgroundColor: '#b12ff3', width: 300, height: 40, alignItems: 'center', justifyContent: 'center', marginTop: 50, borderRadius: 25, marginLeft: 28, marginBottom: 20
+            }}
               // onClick={this.onClick}
-              block style={{ alignSelf: 'center', width: '95%', margin: 'auto', backgroundColor: 'black', marginTop: 30 }} iconLeft
+              // block style={{ alignSelf: 'center', width: '95%', margin: 'auto', backgroundColor: 'black', marginTop: 30 }} iconLeft
               onPress={this.createAccount}
             >
-              <Icon name='unlock' />
-              <Text>SIGNUP</Text>
-            </Button>
+              {/* <Icon name='unlock' /> */}
+              <Text style={{color:'white'}}>SIGNUP</Text>
+            </TouchableOpacity>
 
             {/* <Picker
                             mode="dropdown"
@@ -231,5 +239,7 @@ const styles = StyleSheet.create({
 
 
   },
+ 
+
 
 });

@@ -7,15 +7,15 @@
  */
 
 import React, { Component } from 'react';
+import CarsList from './src/components/Screens/carsList';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { Container, Content, Header, Thumbnail } from 'native-base';
 import store from './src/store/store';
 import { Provider } from 'react-redux';
 
-// import HeaderComponent from './src/components/header'
-// import TabsComponents from './src/components/homeTabs/index'
-import AppNavigator from './src/components/Screens/index'
-// import CarsList from './src/components/Screens/carsList';
+
+import AppNavigator from './src/components/Screens/index';
+
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
   android:
@@ -29,9 +29,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <Container style={styles.container}>
-          {/* <HeaderComponent /> */}
-          {/* <TabsComponents />
-        < */}
+
           <AppNavigator />
           {/* <CarsList /> */}
 

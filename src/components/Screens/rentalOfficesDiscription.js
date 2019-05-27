@@ -21,7 +21,7 @@ export default class CarRentalOffices extends Component {
         // Alert.alert(this.business);
 
 
-        fetch('http://192.168.100.66:7080/alluser', {
+        fetch('http://192.168.10.9:7080/alluser', {
             method: 'GET',
             headers: {
                 'Content-Type': 'applocation/json'
@@ -104,7 +104,7 @@ const style = StyleSheet.create({
         alignItems: 'center',
     },
     contactBtn: {
-        backgroundColor: '#de2d3d',
+        backgroundColor: '#b12ff3',
         width: 140,
         height: 30,
         borderRadius: 25,
@@ -144,7 +144,7 @@ const style = StyleSheet.create({
         backgroundColor: 'white'
     },
     buttonStyle: {
-        backgroundColor: '#de2d3d',
+        backgroundColor: '#b12ff3',
         width: 300,
         height: 30,
         alignItems: 'center',

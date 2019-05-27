@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { Image } from 'react-native';
+import { Image, TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right, ScrollableTab } from 'native-base';
 export default class CarsList extends Component {
@@ -32,9 +32,9 @@ export default class CarsList extends Component {
                 </Body>
 
                 <Right>
-                  <Button style={{ backgroundColor: '#de2d3d', width: 120, height: 40, borderRadius: 50, justifyContent: 'center'}}  >
-                    <Text>Book</Text>
-                  </Button>
+                  <TouchableOpacity onPress={() => this.props.navigation.navigate('CarRentalOffices')} style={{ backgroundColor: '#b12ff3', width: 120, height: 40, borderRadius: 50, justifyContent: 'center' }}  >
+                    <Text style={{ color: 'white', marginLeft:35, fontWeight:'bold' }}>Book</Text>
+                  </TouchableOpacity>
                 </Right>
               </CardItem>
             </Card>
@@ -60,10 +60,10 @@ export default class CarsList extends Component {
                   </Button>
                 </Body>
 
-                <Right >
-                  <Button style={{ backgroundColor: '#de2d3d', width: 120, height: 40, borderRadius: 50, justifyContent: 'center' }} >
-                    <Text>Book</Text>
-                  </Button>
+                <Right>
+                  <TouchableOpacity onPress={() => this.props.navigation.navigate("CarRentalOffices")} style={{ backgroundColor: '#b12ff3', width: 120, height: 40, alignContent: 'center', borderRadius: 50, justifyContent: 'center' }} >
+                    <Text style={{ color: 'white',marginLeft:35, fontWeight:'bold'  }}>Book</Text>
+                  </TouchableOpacity>
                 </Right>
               </CardItem>
             </Card>

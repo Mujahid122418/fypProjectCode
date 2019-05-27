@@ -84,10 +84,10 @@ export default class MapScreen extends Component {
 					});
 
 					Alert.alert("add");
-					fetch('http://192.168.100.66:7080/getnearestlocations?latitude=' + position.coords.latitude + '&longitude=' + position.coords.longitude).then((resp) => resp.json())
+					fetch('http://192.168.100.26:7080/getnearestlocations?latitude=' + position.coords.latitude + '&longitude=' + position.coords.longitude).then((resp) => resp.json())
 						.then((businesses) => {
 
-							Alert.alert('found data' + businesses.length)
+							Alert.alert('found nearest Car Rental Offices' + businesses.length)
 
 							this.setState(prevState => {
 								let previousState = prevState
@@ -100,7 +100,7 @@ export default class MapScreen extends Component {
 									markers.push({
 										// icon: {
 										// image: require("../blue-dot.png"),
-										image: {locationLogo},
+										image: { locationLogo },
 										title: business.username,
 										number: business.number,
 										business: business.business,
@@ -114,14 +114,14 @@ export default class MapScreen extends Component {
 
 								});
 
-								// markers.push({
-								// 	coordinate: {
-								// 		latitude: position.coords.latitude,
-								// 		longitude: position.coords.longitude,
-								// 		latitudeDelta: 0.0022,
-								// 		longitudeDelta: Dimensions.get("window").width / Dimensions.get("window").height * 0.0022
-								// 	}
-								// });
+								markers.push({
+									coordinate: {
+										latitude: position.coords.latitude,
+										longitude: position.coords.longitude,
+										latitudeDelta: 0.0022,
+										longitudeDelta: Dimensions.get("window").width / Dimensions.get("window").height * 0.0022
+									}
+								});
 								return {
 									focusedLocation: {
 										latitude: position.coords.latitude,
@@ -226,7 +226,7 @@ export default class MapScreen extends Component {
 			})
 	}
 	render() {
-		const uri = 'https://businessdial.pk/wp-content/uploads/2019/03/Add-Business-Get-Business-2.jpg'
+		// const uri = 'https://businessdial.pk/wp-content/uploads/2019/03/Add-Business-Get-Business-2.jpg'
 		return (
 			<View>
 				{/* <View style={{ alignItems: 'center', marginTop: 0 }}>
@@ -244,7 +244,7 @@ export default class MapScreen extends Component {
 						// onPress={this.props.onLocationMarked}
 						return ((markerData) => {
 							return <Marker title={item.title} key={index}
-								onPress={(cords) => { this.props.navigation.navigate("CarRentalOffices", { number: markerData.number , business: markerData.business }) }}
+								onPress={(cords) => { this.props.navigation.navigate("CarRentalOffices", { number: markerData.number, business: markerData.business }) }}
 								coordinate={item.coordinate} />
 						})(item);
 					}) : null
