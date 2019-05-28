@@ -14,11 +14,15 @@ constructor(props) {
     super(props);
 
     this.email= this.props.navigation.getParam('email');
+    this.address = this.props.navigation.getParam('address');
+    this.business = this.props.navigation.getParam('business');
+
+    // Alert.alert(this.address);
    
-    Alert.alert(this.email);
+    // Alert.alert(this.email);
 
 
-    fetch('http://192.168.0.107:7080/allBusiness', {
+    fetch('http://192.168.10.26:7080/allBusiness', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -36,7 +40,7 @@ constructor(props) {
       text: 'That was easy to send email via nodejs!'
     };
     return new Promise((s, e) => {
-      fetch('http://192.168.0.107:7080/email', {
+      fetch('http://192.168.10.26:7080/email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -57,8 +61,8 @@ constructor(props) {
                 <Left>
                   <Thumbnail source={require('../../images/office.jpg')} />
                   <Body>
-                    <Text>Rental office</Text>
-                    <Text note>Jhang Road</Text>
+                    <Text>{this.business}</Text>
+                    <Text note>{this.address}</Text>
                   </Body>
                 </Left>
               </CardItem>
@@ -81,13 +85,13 @@ constructor(props) {
               </CardItem>
             </Card>
 
-            <Card>
+            {/* <Card>
               <CardItem>
                 <Left>
                   <Thumbnail source={require('../../images/office.jpg')} />
                   <Body>
-                    <Text>Rental office</Text>
-                    <Text note>Jhang Road</Text>
+                    <Text>{this.business}</Text>
+                    <Text note>{this.address}</Text>
                   </Body>
                 </Left>
               </CardItem>
@@ -101,14 +105,14 @@ constructor(props) {
                     <Text >BMW 2019</Text>
                   </Button>
                 </Body>
-                {/* onPress={() => this.props.navigation.navigate("CarRentalOffices")} */}
+                
                 <Right>
                   <TouchableOpacity onPress={() => { this.sendEmail() }} style={{ backgroundColor: '#b12ff3', width: 120, height: 40, alignContent: 'center', borderRadius: 50, justifyContent: 'center' }} >
                     <Text style={{ color: 'white', marginLeft: 35, fontWeight: 'bold' }}>Book car</Text>
                   </TouchableOpacity>
                 </Right>
               </CardItem>
-            </Card>
+            </Card> */}
           </Content>
         </Container>
       </ScrollView>

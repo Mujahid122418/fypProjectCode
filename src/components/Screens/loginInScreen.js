@@ -45,7 +45,7 @@ export default class LogInScreen extends Component {
                             <Label>Password</Label>
                             <Input name="password" value={this.state.password} onChangeText={(text) => { this.setState({ password: text }) }} />
                         </Item>
-                        {/*  */}
+                       
                         <TouchableOpacity style={Styles.button}
                             onPress={this.loginUser}
                         // onPress={() => this.props.navigation.navigate("App")}

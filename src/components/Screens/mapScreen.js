@@ -84,7 +84,7 @@ export default class MapScreen extends Component {
 					});
 
 					Alert.alert("add");
-					fetch('http://192.168.0.107:7080/getnearestlocations?latitude=' + position.coords.latitude + '&longitude=' + position.coords.longitude).then((resp) => resp.json())
+					fetch('http://192.168.10.26:7080/getnearestlocations?latitude=' + position.coords.latitude + '&longitude=' + position.coords.longitude).then((resp) => resp.json())
 						.then((businesses) => {
 
 							Alert.alert('found nearest Car Rental Offices' + businesses.length)
@@ -104,6 +104,7 @@ export default class MapScreen extends Component {
 										title: business.username,
 										number: business.number,
 										business: business.business,
+										address: business.address,
 										email: business.email,
 										coordinate: {
 											latitude: business.location.coordinates[0],
@@ -245,7 +246,7 @@ export default class MapScreen extends Component {
 						// onPress={this.props.onLocationMarked}
 						return ((markerData) => {
 							return <Marker title={item.title} key={index}
-								onPress={(cords) => { this.props.navigation.navigate("CarRentalOffices", { number: markerData.number, business: markerData.business, email: markerData.email }) }}
+								onPress={(cords) => { this.props.navigation.navigate("CarRentalOffices", { number: markerData.number, business: markerData.business, email: markerData.email, address:markerData.address }) }}
 								coordinate={item.coordinate} />
 						})(item);
 					}) : null

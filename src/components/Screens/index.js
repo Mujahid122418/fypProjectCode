@@ -21,10 +21,10 @@ const appTabNavigator = createMaterialBottomTabNavigator({
     animationEnabled: true,
     navigationOptions: { tabBarIcon: ({ tintColor, focused }) => (<Icon name="home" size={24} focused style={{ color: '#ff7043' }} />) }
   },
-  Cars: {
-    screen: Cars,
-    navigationOptions: { tabBarIcon: ({ tintColor }) => (<Icon name="car" size={24} style={{ color: '#ff7043' }} />) }
-  },
+  // Cars: {
+  //   screen: Cars,
+  //   navigationOptions: { tabBarIcon: ({ tintColor }) => (<Icon name="car" size={24} style={{ color: '#ff7043' }} />) }
+  // },
   // NewsFeed: {
   //   screen: NewsFeed,
   //   navigationOptions: { tabBarIcon: ({ tintColor }) => (<Icon name="newspaper" size={24} style={{ color: '#43a047' }} />) }
