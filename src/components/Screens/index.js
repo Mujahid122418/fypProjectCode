@@ -3,7 +3,7 @@ import { createStackNavigator, createAppContainer, createSwitchNavigator, create
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
 import MapScreen from './mapScreen'
 import NewsFeed from './newsFood'
-import Blogs from './blogs'
+import Cars from './cars'
 import CarsList from './carsList';
 import SplashScreen from './splashScreen';
 import Chat from './chatBox';
@@ -22,7 +22,7 @@ const appTabNavigator = createMaterialBottomTabNavigator({
     navigationOptions: { tabBarIcon: ({ tintColor, focused }) => (<Icon name="home" size={24} focused style={{ color: '#ff7043' }} />) }
   },
   Cars: {
-    screen: Blogs,
+    screen: Cars,
     navigationOptions: { tabBarIcon: ({ tintColor }) => (<Icon name="car" size={24} style={{ color: '#ff7043' }} />) }
   },
   // NewsFeed: {

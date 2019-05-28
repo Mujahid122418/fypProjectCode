@@ -1,19 +1,47 @@
 let exp = require('express');
 let bd = require('body-parser');
+var nodemailer = require('nodemailer');
 let Business = require('./models/business');
 let User = require('./models/user');
 require('./db/config');
-
 let app = exp();
+
 
 app.use(bd.urlencoded());
 app.use(bd.json());
 
 let maxDistance = 6;
+
+
+app.post('/email', (req, res) => {
+    // console.log(req.body);
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'mujahid122418@gmail.com',
+            pass: 'Mujahidiqbal2'
+        }
+    });
+    var mailOptions = {
+        ...req.body
+    };
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    });
+});
 app.get('/allUser', (req, res) => {
     User.find(function (err, users) {
         res.json(users);
     })
+})
+app.get('/allBusiness', (req, res) => {
+    Business.find(function (err, business) {
+        res.send(business)
+    });
 })
 app.post('uploadAd', (req, res) => {
 

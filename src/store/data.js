@@ -46,7 +46,7 @@ const dataReducer = (state = initialData, action) => {
          data.login(action.data).then((resp) => {        
 
             if(!resp){
-               Alert.alert("Invalid credentials");
+               Alert.alert("Invalid User");
                return;
             }
             
