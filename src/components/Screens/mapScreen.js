@@ -84,7 +84,7 @@ export default class MapScreen extends Component {
 					});
 
 					Alert.alert("add");
-					fetch('http://192.168.10.26:7080/getnearestlocations?latitude=' + position.coords.latitude + '&longitude=' + position.coords.longitude).then((resp) => resp.json())
+					fetch('http://192.168.43.36:7080/getnearestlocations?latitude=' + position.coords.latitude + '&longitude=' + position.coords.longitude).then((resp) => resp.json())
 						.then((businesses) => {
 
 							Alert.alert('found nearest Car Rental Offices' + businesses.length)

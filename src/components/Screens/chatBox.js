@@ -15,7 +15,7 @@ const style = StyleSheet.create({
 const steps = [
   {
     id: '1',
-    message: 'hello, how can i help you',
+    message: 'Wellome, Thanx for your consideration',
     trigger: '2'
   },
   {
@@ -24,7 +24,7 @@ const steps = [
     trigger: '3'
   },{
     id:'3',
-    message:'thanx for you consideration',
+    message:'Soon, Our Caption contact from you for ride',
     end:true
     
   }

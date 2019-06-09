@@ -22,7 +22,7 @@ constructor(props) {
     // Alert.alert(this.email);
 
 
-    fetch('http://192.168.10.26:7080/allBusiness', {
+    fetch('http://192.168.43.36:7080/allBusiness', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -37,10 +37,10 @@ constructor(props) {
       from: 'mujahid122418@gmail.com',
       to: this.email,
       subject: 'Sending Email using Node.js',
-      text: 'That was easy to send email via nodejs!'
+      text: 'Wellcome, Caption please conform your ride!'
     };
     return new Promise((s, e) => {
-      fetch('http://192.168.10.26:7080/email', {
+      fetch('http://192.168.43.36:7080/email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

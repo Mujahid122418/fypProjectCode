@@ -46,7 +46,7 @@ app.get('/allBusiness', (req, res) => {
 app.post('uploadAd', (req, res) => {
 
 
-});
+});xq
 
 function getDistance(lat1, lon1, lat2, lon2) {
     var R = 6371; // km (change this constant to get miles)
