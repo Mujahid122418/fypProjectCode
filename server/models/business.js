@@ -12,7 +12,9 @@ let BusinessSchema = mongoose.Schema({
     number: String,
     address: String,
     password: String,
-    ImageSource: String
+    ImageSource: String,
+    drivingLicenceNum: String,
+
 
 });
 

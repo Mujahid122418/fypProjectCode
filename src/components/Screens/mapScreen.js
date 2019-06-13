@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, View, Button, Alert } from 'react-native';
 import { Container, Thumbnail, Content } from 'native-base';
 import { Dimensions, Text, TouchableHighlight } from 'react-native';
-import locationLogo from '../../images/location.png'
+import locationLogo from '../../images/location.png';
 // import Geolocation from 'react-native-geolocation-service';
 import MapView, { Marker } from 'react-native-maps';
 
@@ -23,6 +23,7 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
 function deg2rad(deg) {
 	return deg * (Math.PI / 180)
 }
+
 
 export default class MapScreen extends Component {
 	static navigationOptions = {
@@ -83,8 +84,9 @@ export default class MapScreen extends Component {
 						longitudeDelta: Dimensions.get("window").width / Dimensions.get("window").height * 0.0022
 					});
 
+					Alert.alert(position.toString());
 					Alert.alert("add");
-					fetch('http://192.168.43.36:7080/getnearestlocations?latitude=' + position.coords.latitude + '&longitude=' + position.coords.longitude).then((resp) => resp.json())
+					fetch('http://192.168.100.10:7080/getnearestlocations?latitude=' + position.coords.latitude + '&longitude=' + position.coords.longitude).then((resp) => resp.json())
 						.then((businesses) => {
 
 							Alert.alert('found nearest Car Rental Offices' + businesses.length)
@@ -95,17 +97,24 @@ export default class MapScreen extends Component {
 
 								businesses.forEach((business) => {
 
-
 									// Alert.alert(business.location.coordinates[1].toString());
 									markers.push({
 										// icon: {
-										// image: require("../blue-dot.png"),
-										image: { locationLogo },
+										image: require("../../images/location.png"),
+										// image: { locationLogo },
+										// icon: {locationLogo},
 										title: business.username,
 										number: business.number,
 										business: business.business,
 										address: business.address,
 										email: business.email,
+										
+										// label: {
+										// 	text: "Hello world!",
+										// 	color: "white",
+										// 	fontWeight: "bold",
+										// 	fontSize: "16px"
+										// },
 										coordinate: {
 											latitude: business.location.coordinates[0],
 											longitude: business.location.coordinates[1],
@@ -121,11 +130,13 @@ export default class MapScreen extends Component {
 										latitude: position.coords.latitude,
 										longitude: position.coords.longitude,
 										latitudeDelta: 0.0022,
+										// title: business.username,
 										longitudeDelta: Dimensions.get("window").width / Dimensions.get("window").height * 0.0022
 									}
 								});
 								return {
 									focusedLocation: {
+										// title: business.username,
 										latitude: position.coords.latitude,
 										longitude: position.coords.longitude,
 										latitudeDelta: 0.0022,

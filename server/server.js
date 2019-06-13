@@ -46,7 +46,7 @@ app.get('/allBusiness', (req, res) => {
 app.post('uploadAd', (req, res) => {
 
 
-});xq
+});
 
 function getDistance(lat1, lon1, lat2, lon2) {
     var R = 6371; // km (change this constant to get miles)
@@ -57,8 +57,9 @@ function getDistance(lat1, lon1, lat2, lon2) {
         Math.sin(dLon / 2) * Math.sin(dLon / 2);
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     var d = R * c;
-    if (d > 1) return Math.round(d) + "km";
-    else if (d <= 1) return Math.round(d * 1000) + "m";
+    return d;
+    // if (d > 1) return Math.round(d) + "km";
+    // else if (d <= 1) return Math.round(d * 1000) + "m";
     return d;
 }
 
@@ -79,19 +80,28 @@ function getDistance(lat1, lon1, lat2, lon2) {
 //    });
 
 app.get('/getnearestlocations', (req, res) => {
+//fsd
+    // let cLongtitude = 31.4189061419380;
+    // let cLatitude = 73.0717697806911;
 
-    let cLongtitude = 31.4189061419380;
-    let cLatitude = 73.0717697806911;
-
+//gojra
+    let cLongtitude = 31.137899;
+    let cLatitude = 72.662622;
 
     Business.find({}, function (err, businesses) {
 
         let nearByLocations = businesses.filter((business) => {
 
             let distance = parseFloat(getDistance(cLongtitude, cLatitude, business.location.coordinates[0], business.location.coordinates[1]));
-            return distance < (maxDistance * 1000);
+            return distance < (maxDistance       );
         })
 
+        nearByLocations = nearByLocations.map((business)=>{
+            let obj = JSON.parse(JSON.stringify(business));
+            obj.distance = getDistance(cLongtitude, cLatitude, business.location.coordinates[0], business.location.coordinates[1]);
+            return obj;
+        })
+        
         res.json(nearByLocations);
 
     });

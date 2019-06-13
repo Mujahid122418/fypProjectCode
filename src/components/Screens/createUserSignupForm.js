@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ImagePicker from 'react-native-image-picker';
 // AppRegistry, StyleSheet, Text, View, PixelRatio, TouchableOpacity, Image,
-import { Alert, StyleSheet, PixelRatio, TouchableOpacity, Image } from 'react-native'
+import { Alert, StyleSheet, PixelRatio, TouchableOpacity, Image, } from 'react-native'
 import { Container, Content, Thumbnail, Form, Item, View, Label, Input, Button, Text, ListItem } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -10,21 +10,35 @@ import logo from '../../images/logo.png'
 import MapScreen from './mapScreen';
 
 import store from '../../store/store';
+import { validate } from '@babel/types';
+
+const initState = {
+  type: "Business",
+  checked: 'first',
+  username: '',
+  usernameError: '',
+  business: '',
+  businessError: '',
+  email: '',
+  emailError: '',
+  number: '',
+  numberError: '',
+  address: '',
+  addressError: '',
+  drivingLicenceNum: '',
+  drivingLicenceNumError: '',
+  password: '',
+  passwordError: '',
+  image: '',
+  Error: '',
+  ImageSource: null
+}
 
 
 export default class createUserSignupForm extends Component {
-  state = {
-    type: "Business",
-    checked: 'first',
-    username: 'Mujahid',
-    business: '',
-    email: '',
-    number: '',
-    address: '',
-    password: '123',
-    image: '',
-    ImageSource: null
-  }
+  state = initState
+
+
   selectPhotoTapped() {
     const options = {
       quality: 1.0,
@@ -68,8 +82,23 @@ export default class createUserSignupForm extends Component {
       type: 'USER_SIGNING_UP',
       data: this.state
     });
+    const isValid = this.validate();
+    if (isValid) {
+      this.setState({ initState })
+    }
+    // Alert.alert(' form submit');
     // Alert.alert(JSON.stringify(this.state.type));
-
+    // const { username } = this.state;
+    // if (username == "") {
+    //   // Alert.alert('plz enter user name');
+    //   this.setState({
+    //     Error: "plz enter first name"
+    //   })
+    // } else {
+    //   this.setState({
+    //     Error: 'your form submited successfully'
+    //   })
+    // }
 
   }
   static navigationOptions = {
@@ -81,12 +110,46 @@ export default class createUserSignupForm extends Component {
       [evt.target.name]: evt.target.value
     });
     // Alert.alert(evt.nativeEvent.target.name)
-    console.log(evt)
-
+    // console.log(evt)
   }
-  // onClick = () => {
-  //     Alert.alert('added');
-  // }
+  validate = () => {
+    let usernameError = "";
+    let businessError = "";
+    let emailError = "";
+    let numberError = "";
+    let addressError = "";
+    let drivingLicenceNumError = "";
+    let passwordError = "";
+    if (!this.state.username) {
+      usernameError = "plz enter username"
+    }
+    if (!this.state.business) {
+      businessError = "plz enter business name"
+    }
+    if (!this.state.email) {
+      emailError = "plz enter email"
+    }
+    if (!this.state.number) {
+      numberError = "plz enter number"
+    }
+    if (!this.state.address) {
+      addressError = "plz enter address"
+    }
+    if (!this.state.drivingLicenceNum) {
+      drivingLicenceNumError = "plz enter driving licence number"
+    }
+    if (!this.state.password) {
+      passwordError = "plz enter password"
+    }
+    if (usernameError || businessError || emailError || numberError || addressError || drivingLicenceNumError || passwordError) {
+      this.setState({ usernameError, businessError, emailError, numberError, drivingLicenceNumError, passwordError, addressError })
+      return false
+    }
+    return true
+  }
+
+
+
   onLocationMarked = (location) => {
     this.setState({
       location: {
@@ -97,17 +160,18 @@ export default class createUserSignupForm extends Component {
     Alert.alert('signup');
   }
   render() {
+
     const type = this.state.type;
     console.log(this.props)
     // const path = 'https://i.pinimg.com/originals/cd/ba/7a/cdba7ad02665c51892c4860f6fc201af.png'
     return (
-
       <Container>
+        <Text style={{ color: 'red', textAlign: 'center', justifyContent: 'center' }}>{this.state.Error}</Text>
 
         <Content>
           <Image style={{ width: 150, height: 150, marginLeft: 100, marginTop: 50 }} source={logo} />
           {/* <Thumbnail style={{ position: 'absolute', marginTop: '8%', width: 150, height: 100, flex: 1, justifyContent: 'center', alignSelf: 'center' }} large square source={{ uri: path }} /> */}
-          <Form style={{ marginTop: '5%' }}>
+          <Form onSubmit={this.handelSubmit} style={{ marginTop: '5%' }}>
             <View style={{ flex: 1, flexDirection: 'row', alignContent: 'center', justifyContent: 'center' }}>
 
               <Text>User</Text>
@@ -127,39 +191,59 @@ export default class createUserSignupForm extends Component {
                 onPress={() => { this.setState({ type: 'Business', }); }}
               />
             </View>
-            {this.state.type == "Business" && <MapScreen onLocationHandled={this.onLocationMarked}  />}
+            {this.state.type == "Business" && <MapScreen onLocationHandled={this.onLocationMarked} />}
+
             <Item floatingLabel>
-            <Icon name='user' size={25} color="black" />
+              <Icon name='user' size={25} color="black" />
 
               <Label>Username</Label>
               <Input name="username" value={this.state.username} onChangeText={(text) => { this.setState({ username: text }) }} />
             </Item>
+            {this.state.usernameError ? (<View ><Text style={{ color: 'red', textAlign: 'center' }}>{this.state.usernameError}</Text></View>
+            ) : null}
             {this.state.type == "Business" && <Item floatingLabel>
               <Icon active name='business' />
               <Label>Business Name</Label>
               <Input name="business" value={this.state.business} onChangeText={(text) => { this.setState({ business: text }) }} />
             </Item>}
+            {this.state.businessError && this.state.type == "Business" ? (<View ><Text style={{ color: 'red', textAlign: 'center' }}>{this.state.businessError}</Text></View>
+            ) : null}
             <Item floatingLabel>
               <Icon active name='email' />
               <Label>Email</Label>
+
               <Input name="email" value={this.state.email} onChangeText={(text) => { this.setState({ email: text }) }} />
             </Item>
+            {this.state.emailError ? (<View ><Text style={{ color: 'red', textAlign: 'center' }}>{this.state.emailError}</Text></View>
+            ) : null}
             <Item floatingLabel>
               <Icon active name='phone' />
               <Label> Contact Number</Label>
               <Input name="number" value={this.state.number} onChangeText={(text) => { this.setState({ number: text }) }} />
             </Item>
+            {this.state.numberError ? (<View ><Text style={{ color: 'red', textAlign: 'center' }}>{this.state.numberError}</Text></View>
+            ) : null}
             <Item floatingLabel>
               <Icon active name='logo-apple' />
               <Label> Address</Label>
               <Input name="address" value={this.state.address} onChangeText={(text) => { this.setState({ address: text }) }} />
             </Item>
-
+            {this.state.addressError ? (<View ><Text style={{ color: 'red', textAlign: 'center' }}>{this.state.addressError}</Text></View>
+            ) : null}
+            {this.state.type == "Business" && <Item floatingLabel>
+              <Icon active name='logo-apple' />
+              <Label> Driving Licence Number</Label>
+              <Input name="drivingLicenceNum" value={this.state.drivingLicenceNum} onChangeText={(text) => { this.setState({ drivingLicenceNum: text }) }} />
+            </Item>}
+            {this.state.drivingLicenceNumError && this.state.type == "Business" ? (<View ><Text style={{ color: 'red', textAlign: 'center' }}>{this.state.drivingLicenceNumError}</Text></View>
+            ) : null}
             <Item floatingLabel last>
               <Icon active name='key' />
               <Label>Password</Label>
               <Input name="password" value={this.state.password} onChangeText={(text) => { this.setState({ password: text }) }} />
             </Item>
+            {this.state.passwordError ? (<View ><Text style={{ color: 'red', textAlign: 'center' }}>{this.state.passwordError}</Text></View>
+            ) : null}
             {this.state.type == "Business" &&
               <View style={styles.container}>
 
@@ -183,33 +267,12 @@ export default class createUserSignupForm extends Component {
               onPress={this.createAccount}
             >
               {/* <Icon name='unlock' /> */}
-              <Text style={{color:'white'}}>SIGNUP</Text>
+              <Text style={{ color: 'white' }}>SIGNUP</Text>
             </TouchableOpacity>
 
-            {/* <Picker
-                            mode="dropdown"
-                            andriodIcon={<Icon name="arrow-down" />}
-                            style={{ width: '100px' }}
-                            placeholder="Select your SIM"
-                            placeholderStyle={{ color: "#bfc6ea" }}
-                            placeholderIconColor="#007aff"
-                            selectedValue={this.state.selected2}
-                            onValueChange={this.onValueChange2.bind(this)}
-                        >
-                            <Picker.Item label="Wallet" value="key0" />
-                            <Picker.Item label="ATM Card" value="key1" />
-                            <Picker.Item label="Debit Card" value="key2" />
-                            <Picker.Item label="Credit Card" value="key3" />
-                            <Picker.Item label="Net Banking" value="key4" />
-                        </Picker> */}
 
           </Form>
-          {/* <ListItem>
-                        <Button onPress={() => this.props.navigation.navigate("MainPage")} block style={{ width: '38%', flex: 1, alignSelf: 'center', marginTop: 30 }} dark iconLeft>
-                            <Icon name='unlock' />
-                            <Text>SIGNUP</Text>
-                        </Button>
-                    </ListItem> */}
+
 
         </Content>
       </Container>
@@ -239,7 +302,7 @@ const styles = StyleSheet.create({
 
 
   },
- 
+
 
 
 });
