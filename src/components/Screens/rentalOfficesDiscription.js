@@ -20,13 +20,15 @@ export default class CarRentalOffices extends Component {
         this.number = this.props.navigation.getParam('number');
         this.business = this.props.navigation.getParam('business');
         this.address = this.props.navigation.getParam('address');
+        this.carmodel = this.props.navigation.getParam('carmodel');
+
         targetEmail = this.props.navigation.getParam('email');
 
-        // Alert.alert(this.email);
+        // Alert.alert(this.carmodel);
         // Alert.alert(this.business);
 
 
-        fetch('http://192.168.100.10:7080/alluser', {
+        fetch('http://192.168.10.17:7080/alluser', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -82,7 +84,7 @@ export default class CarRentalOffices extends Component {
                                 scrambled it to make a type specimen book.
                         It has survived not only five centuries, </Text>
                         </View>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('CarsList', { email: targetEmail, business: this.business, address:this.address })} style={[style.buttonStyle, { marginTop: 40, marginLeft: 20 }, shadow]}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('CarsList', { email: targetEmail, business: this.business, address:this.address, carmodel:this.carmodel })} style={[style.buttonStyle, { marginTop: 40, marginLeft: 20 }, shadow]}>
                             <Text style={{ color: 'white' }}>Available Cars</Text>
                         </TouchableOpacity>
 

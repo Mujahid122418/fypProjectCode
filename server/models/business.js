@@ -11,6 +11,7 @@ let BusinessSchema = mongoose.Schema({
     email: String,
     number: String,
     address: String,
+    carModel:String,
     password: String,
     ImageSource: String,
     drivingLicenceNum: String,

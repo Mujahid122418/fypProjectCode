@@ -16,13 +16,14 @@ constructor(props) {
     this.email= this.props.navigation.getParam('email');
     this.address = this.props.navigation.getParam('address');
     this.business = this.props.navigation.getParam('business');
+    this.carmodel = this.props.navigation.getParam('carmodel');
 
-    // Alert.alert(this.address);
+    // Alert.alert(this.carmodel);
    
     // Alert.alert(this.email);
 
 
-    fetch('http://192.168.100.10:7080/allBusiness', {
+    fetch('http://192.168.100.4:7080/allBusiness', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -40,7 +41,7 @@ constructor(props) {
       text: 'Wellcome, Caption please conform your ride!'
     };
     return new Promise((s, e) => {
-      fetch('http://192.168.100.10:7080/email', {
+      fetch('http://192.168.10.17:7080/email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -50,6 +51,7 @@ constructor(props) {
 
     });
   }
+ 
   render() {
     return (
       <ScrollView>
@@ -67,13 +69,13 @@ constructor(props) {
                 </Left>
               </CardItem>
               <CardItem cardBody>
-                <Image source={require('../../images/car1.jpg')} style={{ height: 150, width: null, flex: 1 }} />
+                <Image source={require('../../images/car1.jpg')} style={{ height: 250, width: null, flex: 1 }} />
               </CardItem>
               <CardItem>
                 <Body>
                   <Button transparent>
                     <Text style={{ fontSize: 20 }}>Model</Text>
-                    <Text >Civic 2018</Text>
+                    <Text >{this.carmodel}</Text>
                   </Button>
                 </Body>
                 {/* onPress={() => this.props.navigation.navigate('CarRentalOffices')} */}

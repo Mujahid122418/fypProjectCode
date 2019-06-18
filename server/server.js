@@ -80,28 +80,27 @@ function getDistance(lat1, lon1, lat2, lon2) {
 //    });
 
 app.get('/getnearestlocations', (req, res) => {
-//fsd
-    // let cLongtitude = 31.4189061419380;
-    // let cLatitude = 73.0717697806911;
+    //fsd
+    let cLongtitude = 31.4189061419380;
+    let cLatitude = 73.0717697806911;
 
-//gojra
-    let cLongtitude = 31.137899;
-    let cLatitude = 72.662622;
+    //gojra
+    // let cLongtitude = 31.137899;
+    // let cLatitude = 72.662622;
 
     Business.find({}, function (err, businesses) {
 
         let nearByLocations = businesses.filter((business) => {
 
             let distance = parseFloat(getDistance(cLongtitude, cLatitude, business.location.coordinates[0], business.location.coordinates[1]));
-            return distance < (maxDistance       );
+            return distance < (maxDistance);
         })
 
-        nearByLocations = nearByLocations.map((business)=>{
+        nearByLocations = nearByLocations.map((business) => {
             let obj = JSON.parse(JSON.stringify(business));
             obj.distance = getDistance(cLongtitude, cLatitude, business.location.coordinates[0], business.location.coordinates[1]);
             return obj;
         })
-        
         res.json(nearByLocations);
 
     });

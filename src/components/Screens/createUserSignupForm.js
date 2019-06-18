@@ -31,6 +31,8 @@ const initState = {
   passwordError: '',
   image: '',
   Error: '',
+  carModel:'',
+  ErrorcarModel:'',
   ImageSource: null
 }
 
@@ -119,6 +121,7 @@ export default class createUserSignupForm extends Component {
     let numberError = "";
     let addressError = "";
     let drivingLicenceNumError = "";
+    let ErrorcarModel = "";
     let passwordError = "";
     if (!this.state.username) {
       usernameError = "plz enter username"
@@ -137,6 +140,9 @@ export default class createUserSignupForm extends Component {
     }
     if (!this.state.drivingLicenceNum) {
       drivingLicenceNumError = "plz enter driving licence number"
+    }
+    if (!this.state.ErrorcarModel) {
+      ErrorcarModel = "plz enter car name & model"
     }
     if (!this.state.password) {
       passwordError = "plz enter password"
@@ -234,6 +240,11 @@ export default class createUserSignupForm extends Component {
               <Icon active name='logo-apple' />
               <Label> Driving Licence Number</Label>
               <Input name="drivingLicenceNum" value={this.state.drivingLicenceNum} onChangeText={(text) => { this.setState({ drivingLicenceNum: text }) }} />
+            </Item>}
+            {this.state.type == "Business" && <Item floatingLabel>
+              <Icon active name='logo-apple' />
+              <Label> Car Model</Label>
+              <Input name="carModel" value={this.state.carModel} onChangeText={(text) => { this.setState({ carModel: text }) }} />
             </Item>}
             {this.state.drivingLicenceNumError && this.state.type == "Business" ? (<View ><Text style={{ color: 'red', textAlign: 'center' }}>{this.state.drivingLicenceNumError}</Text></View>
             ) : null}

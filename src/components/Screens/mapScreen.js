@@ -86,10 +86,10 @@ export default class MapScreen extends Component {
 
 					Alert.alert(position.toString());
 					Alert.alert("add");
-					fetch('http://192.168.100.10:7080/getnearestlocations?latitude=' + position.coords.latitude + '&longitude=' + position.coords.longitude).then((resp) => resp.json())
+					fetch('http://192.168.10.17:7080/getnearestlocations?latitude=' + position.coords.latitude + '&longitude=' + position.coords.longitude).then((resp) => resp.json())
 						.then((businesses) => {
 
-							Alert.alert('found nearest Car Rental Offices' + businesses.length)
+							Alert.alert('found nearest Car Rental Offices ' + businesses.length)
 
 							this.setState(prevState => {
 								let previousState = prevState
@@ -108,13 +108,9 @@ export default class MapScreen extends Component {
 										business: business.business,
 										address: business.address,
 										email: business.email,
+										carmodel:business.carModel,
 										
-										// label: {
-										// 	text: "Hello world!",
-										// 	color: "white",
-										// 	fontWeight: "bold",
-										// 	fontSize: "16px"
-										// },
+									
 										coordinate: {
 											latitude: business.location.coordinates[0],
 											longitude: business.location.coordinates[1],
@@ -256,12 +252,14 @@ export default class MapScreen extends Component {
 					{this.state.locationChosen ? this.state.markers.map((item, index) => {
 						// onPress={this.props.onLocationMarked}
 						return ((markerData) => {
-							return <Marker title={item.title} key={index}
-								onPress={(cords) => { this.props.navigation.navigate("CarRentalOffices", { number: markerData.number, business: markerData.business, email: markerData.email, address:markerData.address }) }}
+							return <Marker title={item.title} key={index} 
+								onPress={(cords) => { this.props.navigation.navigate("CarRentalOffices", { number: markerData.number, business: markerData.business, email: markerData.email, address:markerData.address , carmodel:markerData.carmodel}) }}
 								coordinate={item.coordinate} />
+								
 						})(item);
 					}) : null
 					}
+					
 				</MapView>
 				{/* <View style={{ marginTop: 10 }}>
 										<Button
