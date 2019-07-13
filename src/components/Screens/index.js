@@ -2,8 +2,8 @@ import React from 'react';
 import { createStackNavigator, createAppContainer, createSwitchNavigator, createBottomTabNavigator, createMaterialTopTabNavigator } from "react-navigation";
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
 import MapScreen from './mapScreen'
-import NewsFeed from './newsFood'
-import Cars from './cars'
+// import NewsFeed from './newsFood'
+// import Cars from './cars'
 import CarsList from './carsList';
 import SplashScreen from './splashScreen';
 import Chat from './chatBox';

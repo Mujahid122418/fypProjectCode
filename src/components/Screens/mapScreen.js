@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, View, Button, Alert } from 'react-native';
 import { Container, Thumbnail, Content } from 'native-base';
 import { Dimensions, Text, TouchableHighlight } from 'react-native';
-import locationLogo from '../../images/location.png';
+import locationLogo from '../../images/image.png';
 // import Geolocation from 'react-native-geolocation-service';
 import MapView, { Marker } from 'react-native-maps';
+
 
 function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
 	var R = 6371; // Radius of the earth in km
@@ -86,7 +87,7 @@ export default class MapScreen extends Component {
 
 					Alert.alert(position.toString());
 					Alert.alert("add");
-					fetch('http://192.168.10.17:7080/getnearestlocations?latitude=' + position.coords.latitude + '&longitude=' + position.coords.longitude).then((resp) => resp.json())
+					fetch('http://192.168.43.36:7080/getnearestlocations?latitude=' + position.coords.latitude + '&longitude=' + position.coords.longitude).then((resp) => resp.json())
 						.then((businesses) => {
 
 							Alert.alert('found nearest Car Rental Offices ' + businesses.length)
@@ -103,7 +104,8 @@ export default class MapScreen extends Component {
 										image: require("../../images/location.png"),
 										// image: { locationLogo },
 										// icon: {locationLogo},
-										title: business.username,
+										title: business.username +'\n' +business.distance.toPrecision(2) +'km' +'\n' + business.distance.toPrecision(1) * 50 +'RS',
+										// title: business.username,
 										number: business.number,
 										business: business.business,
 										address: business.address,
@@ -224,7 +226,7 @@ export default class MapScreen extends Component {
 				}
 			}
 			this.pickLocationHandler(coordsEvent);
-			Alert.alert((20).toString());
+			// Alert.alert((20).toString());
 			this.props.onLocationHandled({
 				latitude: pos.coords.latitude,
 				longitude: pos.coords.longitude
@@ -234,6 +236,7 @@ export default class MapScreen extends Component {
 				alert('Getting Location failed. Please select manually.');
 			})
 	}
+	
 	render() {
 		// const uri = 'https://businessdial.pk/wp-content/uploads/2019/03/Add-Business-Get-Business-2.jpg'
 		return (
@@ -245,16 +248,33 @@ export default class MapScreen extends Component {
 								</View> */}
 				<MapView
 					initialRegion={this.state.focusedLocation}
-					style={{ height: 450, }}
+					style={{ height: 500, }}
 					onPress={this.pickLocationHandler}
 					ref={ref => this.map = ref}
 				>
 					{this.state.locationChosen ? this.state.markers.map((item, index) => {
 						// onPress={this.props.onLocationMarked}
 						return ((markerData) => {
-							return <Marker title={item.title} key={index} 
-								onPress={(cords) => { this.props.navigation.navigate("CarRentalOffices", { number: markerData.number, business: markerData.business, email: markerData.email, address:markerData.address , carmodel:markerData.carmodel}) }}
-								coordinate={item.coordinate} />
+							return(
+								<Marker
+										title={item.title}
+										key={index}
+										image={locationLogo}
+										style={{ width: 50, height: 50 }}
+										onPress={(cords) => {
+											this.props.navigation.navigate('CarRentalOffices', {
+												number: markerData.number,
+												business: markerData.business,
+												email: markerData.email,
+												address: markerData.address,
+												carmodel: markerData.carmodel
+											});
+										}}
+										coordinate={item.coordinate}
+									>
+										<Text style={style.textView}>{item.title}</Text>
+									</Marker>
+							)
 								
 						})(item);
 					}) : null
@@ -278,11 +298,15 @@ export default class MapScreen extends Component {
 	}
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
 		backgroundColor: '#F5FCFF',
 	},
+	textView: {
+		fontSize: 14,
+		color: 'black'
+	}
 });

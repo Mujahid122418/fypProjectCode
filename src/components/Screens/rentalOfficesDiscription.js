@@ -28,7 +28,7 @@ export default class CarRentalOffices extends Component {
         // Alert.alert(this.business);
 
 
-        fetch('http://192.168.10.17:7080/alluser', {
+        fetch('http://192.168.43.36:7080/alluser', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

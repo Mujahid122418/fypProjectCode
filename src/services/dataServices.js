@@ -6,7 +6,7 @@ let dataService = {
 
         return new Promise((s, e) => {
 
-            fetch('http://192.168.10.17:7080/signup', {
+            fetch('http://192.168.43.36:7080/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -22,7 +22,7 @@ let dataService = {
     login(data) {
         Alert.alert("login");
         return new Promise((s, e) => {
-            fetch('http://192.168.10.17:7080/login', {
+            fetch('http://192.168.43.36:7080/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
