@@ -12,7 +12,9 @@ import { Platform, StyleSheet, Text, View } from 'react-native';
 import { Container, Content, Header, Thumbnail } from 'native-base';
 import store from './src/store/store';
 import { Provider } from 'react-redux';
-
+import AsyncStorage from '@react-native-community/async-storage'
+import jwtdecode from 'jwt-decode'
+import {NavigationActions} from 'react-navigation'
 
 import AppNavigator from './src/components/Screens/index';
 
@@ -25,6 +27,8 @@ const instructions = Platform.select({
 
 
 export default class App extends Component {
+ 
+  
   render() {
     return (
       <Provider store={store}>

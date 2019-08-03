@@ -6,7 +6,7 @@ import officeImage from '../../images/office.jpg';
 import Icon from 'react-native-vector-icons/Ionicons';
 import user from '../../images/capton.jpg';
 import rating from '../../images/rating.png';
-
+import {ip} from './shareAPI';
 
 const { width: WIDTH } = Dimensions.get('window');
 var targetEmail;
@@ -28,7 +28,7 @@ export default class CarRentalOffices extends Component {
         // Alert.alert(this.business);
 
 
-        fetch('http://192.168.43.36:7080/alluser', {
+        fetch(ip+'alluser', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

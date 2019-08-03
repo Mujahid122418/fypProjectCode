@@ -4,7 +4,7 @@ import { Image, TouchableOpacity, Alert } from 'react-native';
 import { ScrollView } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right, ScrollableTab } from 'native-base';
 import store from '../../store/store';
-
+import {ip} from './shareAPI'
 export default class CarsList extends Component {
  
   state = {
@@ -23,7 +23,7 @@ constructor(props) {
     // Alert.alert(this.email);
 
 
-    fetch('http://192.168.43.36:7080/allBusiness', {
+    fetch(ip+'allBusiness', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -41,7 +41,7 @@ constructor(props) {
       text: 'Wellcome, Caption please conform your ride!'
     };
     return new Promise((s, e) => {
-      fetch('http://192.168.43.36:7080/email', {
+      fetch(ip+'email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

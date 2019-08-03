@@ -1,12 +1,15 @@
 import {Alert} from 'react-native';
-
+import AsyncStorage from '@react-native-community/async-storage';
+import jwtDecode from 'jwt-decode'
+import {ip} from "../components/Screens/shareAPI"
+// var decoded = jwt_decode(token);
 let dataService = {
 
     signup(data) {
 
         return new Promise((s, e) => {
 
-            fetch('http://192.168.43.36:7080/signup', {
+            fetch(ip+"signup", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -22,15 +25,24 @@ let dataService = {
     login(data) {
         Alert.alert("login");
         return new Promise((s, e) => {
-            fetch('http://192.168.43.36:7080/login', {
+            fetch(ip+'login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data)
 
-            }).then(resp => resp.json()).then((resp) => {                
-                s(resp);
+            }).then(resp => resp.json()).then(async (resp) => { 
+                try{
+                   await AsyncStorage.setItem('jwttoken', resp.token)
+                //    alert(resp.token)
+                   s(resp.user);
+                }catch(err) {
+                    alert('err ading token', err)
+                }
+                      
+                
+
             })
         })
     }

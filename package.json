@@ -8,9 +8,10 @@
     "devTools": "react-devtools"
   },
   "dependencies": {
-    "@react-native-community/async-storage": "^1.2.4",
+    "@react-native-community/async-storage": "^1.6.1",
     "body-parser": "^1.19.0",
     "express": "^4.16.4",
+    "jwt-decode": "^2.2.0",
     "link": "^0.1.5",
     "mongoose": "^5.5.7",
     "mongoose-connect": "0.0.3",

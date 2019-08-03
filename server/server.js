@@ -1,6 +1,7 @@
 let exp = require("express");
 let bd = require("body-parser");
 let multer = require("multer");
+var jwt = require('jsonwebtoken');
 let fs = require("fs");
 var nodemailer = require("nodemailer");
 let Business = require("./models/business");
@@ -127,7 +128,10 @@ app.post("/login", (req, res) => {
             password: req.body.password
         },
         function(err, user) {
-            res.json(user);
+          jwt.sign({id: user._id,name: user.name }, "mujahid152418", function(err, token) {
+            console.log(token);
+            res.json({user,token});
+          });
         }
         );
     });

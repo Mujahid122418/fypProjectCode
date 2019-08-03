@@ -3,10 +3,35 @@ import { Platform, StyleSheet, View, Image, TouchableOpacity } from 'react-nativ
 import { Container, Thumbnail, Content, Button, Text } from 'native-base';
 import logo from '../../images/logo.png';
 import { Colors } from 'react-native-paper';
+import AsyncStorage from '@react-native-community/async-storage'
+import jwtdecode from 'jwt-decode'
+import store from '../../store/store'
+
 export default class WelComeScreen extends Component {
   static navigationOptions = {
     header: null
 
+  }
+
+  getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('jwttoken')
+      if(value) {
+        var decoded = jwtdecode(value)
+        // alert(decoded)
+        this.props.navigation.navigate('App')
+        store.dispatch({
+          type: 'USER_LOGGED_IN',
+          payload:decoded || decoded
+       })
+      }
+    } catch(e) {
+      alert('err reading value', e)
+    }
+  }
+
+ async componentDidMount() {
+    await this.getData()
   }
   render() {
 

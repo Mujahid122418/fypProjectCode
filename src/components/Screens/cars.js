@@ -5,11 +5,11 @@ import CarsList from './carsList';
 // import CarsList from './carsList'
 export default class Cars extends Component {
   render() {
-    const uri = 'https://businessdial.pk/wp-content/uploads/2019/03/Add-Business-Get-Business-2.jpg'
+    // const uri = 'https://businessdial.pk/wp-content/uploads/2019/03/Add-Business-Get-Business-2.jpg'
     return (
       <Container >
-     
-      <CarsList navigation={this.props.navigation}   email={this.props.targetEmail}/>
+     <Text>Mujahid</Text>
+      {/* <CarsList navigation={this.props.navigation}   email={this.props.targetEmail}/> */}
       
       </Container>
     );

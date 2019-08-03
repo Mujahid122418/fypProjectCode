@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import logo from '../../images/logo.png';
+import AsyncStorage from '@react-native-community/async-storage'
+import jwtdecode from 'jwt-decode'
+import store from '../../store/store'
 export default class SplashScreen extends Component {
   componentWillMount() {
     setTimeout(() => {
       this.props.navigation.navigate('Welcome');
     }, 1000);
   }
-
+  
   render() {
     return (
       <View style={style.container}>
