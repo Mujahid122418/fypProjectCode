@@ -169,6 +169,8 @@ app.post("/signup", (req, res) => {
 //         res.end("<script>window.onload = function(){ document.body.innerHTML = '" + mergedTags + "'; }</script>");
 //     });
 // });
+
+
 app.use(exp.static('./static'));
 const PORT = process.env.PORT || 7080;
 app.listen(PORT, () => {

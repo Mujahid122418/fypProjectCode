@@ -407,17 +407,13 @@ export default class createUserSignupForm extends Component {
             ) : null}
             {/* {this.state.type == "Business" &&
               <View style={styles.container}>
-
                 <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
                   <View style={styles.ImageContainer}>
                     {this.state.ImageSource === null ? <Text>Select a Photo</Text> :
                       <Image name="image" value={this.state.Image} onChange={(image) => { this.setState({ image: image }) }} style={styles.ImageContainer} source={this.state.ImageSource} />
                     }
                   </View>
-
-
                 </TouchableOpacity>
-
               </View>
             } */}
             {this.state.type == "Business" && (
